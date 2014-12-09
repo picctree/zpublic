@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -19,13 +19,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120_xp</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120_xp</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -62,7 +62,7 @@
       <AdditionalDependencies>./../../3rdparty/cpptest_ext/Debug/cpptest.lib</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>
       </IgnoreAllDefaultLibraries>
-      <AdditionalLibraryDirectories>./../../3rdparty/libcurl_lib/</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>./../../3rdparty/libcurl_lib/;./../../3rdparty/zlib_lib/</AdditionalLibraryDirectories>
     </Link>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
@@ -120,6 +120,7 @@
     <ClInclude Include="..\..\3rdparty\luasrc\lundump.h" />
     <ClInclude Include="..\..\3rdparty\luasrc\lvm.h" />
     <ClInclude Include="..\..\3rdparty\luasrc\lzio.h" />
+    <ClInclude Include="..\..\3rdparty\mongoose\mongoose.h" />
     <ClInclude Include="..\..\pellets\data_box\array_data.h" />
     <ClInclude Include="..\..\pellets\data_box\data_box.h" />
     <ClInclude Include="..\..\pellets\data_box\data_box_def.h" />
@@ -133,6 +134,25 @@
     <ClInclude Include="..\..\pellets\design_pattern\observer.h" />
     <ClInclude Include="..\..\pellets\design_pattern\singleton.h" />
     <ClInclude Include="..\..\pellets\design_pattern\strategy.h" />
+    <ClInclude Include="..\..\pellets\harold\harold.h" />
+    <ClInclude Include="..\..\pellets\harold\harold_header.h" />
+    <ClInclude Include="..\..\pellets\harold\harold_server_auth_log.h" />
+    <ClInclude Include="..\..\pellets\harold\harold_server_def.h" />
+    <ClInclude Include="..\..\pellets\harold\harold_server_dynamic_impl.h" />
+    <ClInclude Include="..\..\pellets\harold\harold_server_impl.h" />
+    <ClInclude Include="..\..\pellets\harold\harold_server_request_api.h" />
+    <ClInclude Include="..\..\pellets\harold\harold_server_request_directory_listing.h" />
+    <ClInclude Include="..\..\pellets\harold\harold_server_request_download.h" />
+    <ClInclude Include="..\..\pellets\harold\harold_server_request_dynamic_api.h" />
+    <ClInclude Include="..\..\pellets\harold\harold_server_request_dynamic_download.h" />
+    <ClInclude Include="..\..\pellets\harold\harold_server_request_log.h" />
+    <ClInclude Include="..\..\pellets\harold\harold_server_request_upload.h" />
+    <ClInclude Include="..\..\pellets\harold\i_harold_server.h" />
+    <ClInclude Include="..\..\pellets\harold\i_harold_server_auth_observer.h" />
+    <ClInclude Include="..\..\pellets\harold\i_harold_server_observer.h" />
+    <ClInclude Include="..\..\pellets\harold\i_harold_server_request_observer.h" />
+    <ClInclude Include="..\..\pellets\harold\i_harold_server_status_observer.h" />
+    <ClInclude Include="..\..\pellets\harold\harold_server_status_log.h" />
     <ClInclude Include="..\..\pellets\hook\i_zl_hook_container.h" />
     <ClInclude Include="..\..\pellets\hook\zl_hook_def.h" />
     <ClInclude Include="..\..\pellets\ipc\ipccallclient.h" />
@@ -173,6 +193,18 @@
     <ClInclude Include="..\..\pellets\thread_sync\thread_sync.h" />
     <ClInclude Include="..\..\pellets\thread_sync\z_t_thread_sync_def.h" />
     <ClInclude Include="..\..\pellets\thread_sync\z_t_atomic.hpp" />
+    <ClInclude Include="..\..\pellets\z_com\export\z_com_dll_lock.hpp" />
+    <ClInclude Include="..\..\pellets\z_com\export\z_com_dll_module.hpp" />
+    <ClInclude Include="..\..\pellets\z_com\export\z_com_dll_object.hpp" />
+    <ClInclude Include="..\..\pellets\z_com\export\z_com_object.hpp" />
+    <ClInclude Include="..\..\pellets\z_com\import\z_com_auto_ptr.hpp" />
+    <ClInclude Include="..\..\pellets\z_com\import\z_com_interface_ptr.hpp" />
+    <ClInclude Include="..\..\pellets\z_com\import\z_com_loader.hpp" />
+    <ClInclude Include="..\..\pellets\z_com\import\z_com_module.hpp" />
+    <ClInclude Include="..\..\pellets\z_com\import\z_com_module_handle.hpp" />
+    <ClInclude Include="..\..\pellets\z_com\z_com.h" />
+    <ClInclude Include="..\..\pellets\z_com\z_com_export.h" />
+    <ClInclude Include="..\..\pellets\z_com\z_com_import.h" />
     <ClInclude Include="..\..\pellets\z_event\z_event_def.h" />
     <ClInclude Include="..\..\pellets\z_event\z_event_event.h" />
     <ClInclude Include="..\..\pellets\z_event\z_event_reactor.h" />
@@ -189,17 +221,45 @@
     <ClInclude Include="..\..\pellets\z_http\z_http_header.h" />
     <ClInclude Include="..\..\pellets\z_lua_bind\z_lua_bind.h" />
     <ClInclude Include="..\..\pellets\z_lua_bind\z_lua_bind_def.h" />
-    <ClInclude Include="..\..\pellets\z_lua_bind\z_lua_bind_internal_call.hpp" />
-    <ClInclude Include="..\..\pellets\z_lua_bind\z_lua_bind_internal_global.hpp" />
     <ClInclude Include="..\..\pellets\z_lua_bind\z_lua_bind_internal.hpp" />
-    <ClInclude Include="..\..\pellets\z_lua_bind\z_lua_bind_internal_functor.hpp" />
-    <ClInclude Include="..\..\pellets\z_lua_bind\z_lua_bind_internal_pop.h" />
-    <ClInclude Include="..\..\pellets\z_lua_bind\z_lua_bind_internal_push.h" />
+    <ClInclude Include="..\..\pellets\z_lua_bind\z_lua_bind_internal_call.hpp" />
     <ClInclude Include="..\..\pellets\z_lua_bind\z_lua_bind_internal_def.hpp" />
+    <ClInclude Include="..\..\pellets\z_lua_bind\z_lua_bind_internal_functor.hpp" />
+    <ClInclude Include="..\..\pellets\z_lua_bind\z_lua_bind_internal_global.hpp" />
+    <ClInclude Include="..\..\pellets\z_lua_bind\z_lua_bind_internal_pop.hpp" />
+    <ClInclude Include="..\..\pellets\z_lua_bind\z_lua_bind_internal_push.hpp" />
     <ClInclude Include="..\..\pellets\z_lua_bind\z_lua_bind_internal_read.hpp" />
     <ClInclude Include="..\..\pellets\z_lua_bind\z_lua_bind_internal_typetrait.hpp" />
-    <ClInclude Include="..\..\pellets\z_lua_bind\z_lua_function_reg.h" />
-    <ClInclude Include="..\..\pellets\z_lua_bind\z_lua_state.h" />
+    <ClInclude Include="..\..\pellets\z_lua_bind\z_lua_function_reg.hpp" />
+    <ClInclude Include="..\..\pellets\z_lua_bind\z_lua_state.hpp" />
+    <ClInclude Include="..\..\pellets\z_net\z_net.h" />
+    <ClInclude Include="..\..\pellets\z_net\z_net_socket_address.h" />
+    <ClInclude Include="..\..\pellets\z_net\z_net_def.h" />
+    <ClInclude Include="..\..\pellets\z_net\z_net_header.h" />
+    <ClInclude Include="..\..\pellets\z_net\z_net_socket_address_ipv4.h" />
+    <ClInclude Include="..\..\pellets\z_net\z_net_wsa_initializer.hpp" />
+    <ClInclude Include="..\..\pellets\z_platform\impl\z_platform_linux_event.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\pellets\z_platform\impl\z_platform_linux_mutex.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\pellets\z_platform\impl\z_platform_linux_thread.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\pellets\z_platform\impl\z_platform_win_event.hpp" />
+    <ClInclude Include="..\..\pellets\z_platform\impl\z_platform_win_mutex.hpp" />
+    <ClInclude Include="..\..\pellets\z_platform\impl\z_platform_win_thread.hpp" />
+    <ClInclude Include="..\..\pellets\z_platform\TestPlatform.h" />
+    <ClInclude Include="..\..\pellets\z_platform\z_platform.h" />
+    <ClInclude Include="..\..\pellets\z_platform\z_platform_def.h" />
+    <ClInclude Include="..\..\pellets\z_platform\z_platform_event.h" />
+    <ClInclude Include="..\..\pellets\z_platform\z_platform_mutex.h" />
+    <ClInclude Include="..\..\pellets\z_platform\z_platform_sleep.h" />
+    <ClInclude Include="..\..\pellets\z_platform\z_platform_thread.h" />
     <ClInclude Include="..\..\pellets\z_thread_pool\z_task.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
@@ -225,15 +285,19 @@
     <ClInclude Include="..\..\pellets\z_timer\z_timer_test_code.h" />
     <ClInclude Include="..\..\pellets\z_timer\z_timer_watcher.h" />
     <ClInclude Include="..\..\pellets\z_win_utils\autorun.hpp" />
+    <ClInclude Include="..\..\pellets\z_win_utils\base64.hpp" />
     <ClInclude Include="..\..\pellets\z_win_utils\browser.hpp" />
     <ClInclude Include="..\..\pellets\z_win_utils\acl.hpp" />
     <ClInclude Include="..\..\pellets\z_win_utils\clipboard.hpp" />
     <ClInclude Include="..\..\pellets\z_win_utils\cmdline.hpp" />
+    <ClInclude Include="..\..\pellets\z_win_utils\com_init.h" />
+    <ClInclude Include="..\..\pellets\z_win_utils\wmi_query.h" />
     <ClInclude Include="..\..\pellets\z_win_utils\console_color.hpp" />
     <ClInclude Include="..\..\pellets\z_win_utils\cpu.hpp" />
+    <ClInclude Include="..\..\pellets\z_win_utils\crc32.hpp" />
     <ClInclude Include="..\..\pellets\z_win_utils\cstring.hpp" />
     <ClInclude Include="..\..\pellets\z_win_utils\directory.hpp" />
-    <ClInclude Include="..\..\pellets\z_win_utils\disk.h" />
+    <ClInclude Include="..\..\pellets\z_win_utils\disk.hpp" />
     <ClInclude Include="..\..\pellets\z_win_utils\drive.hpp" />
     <ClInclude Include="..\..\pellets\z_win_utils\environment_var.hpp" />
     <ClInclude Include="..\..\pellets\z_win_utils\error_code.hpp" />
@@ -244,6 +308,7 @@
     <ClInclude Include="..\..\pellets\z_win_utils\file_version.hpp" />
     <ClInclude Include="..\..\pellets\z_win_utils\gdiplus.hpp" />
     <ClInclude Include="..\..\pellets\z_win_utils\ini.hpp" />
+    <ClInclude Include="..\..\pellets\z_win_utils\md5.hpp" />
     <ClInclude Include="..\..\pellets\z_win_utils\memory.hpp" />
     <ClInclude Include="..\..\pellets\z_win_utils\message.hpp" />
     <ClInclude Include="..\..\pellets\z_win_utils\module.hpp" />
@@ -261,25 +326,36 @@
     <ClInclude Include="..\..\pellets\z_win_utils\shutdown.hpp" />
     <ClInclude Include="..\..\pellets\z_win_utils\sign_info.hpp" />
     <ClInclude Include="..\..\pellets\z_win_utils\sign_verify.hpp" />
+    <ClInclude Include="..\..\pellets\z_win_utils\software_check.hpp" />
+    <ClInclude Include="..\..\pellets\z_win_utils\split_str.hpp" />
+    <ClInclude Include="..\..\pellets\z_win_utils\str_conv.hpp" />
+    <ClInclude Include="..\..\pellets\z_win_utils\system_info.h" />
     <ClInclude Include="..\..\pellets\z_win_utils\system_path.hpp" />
     <ClInclude Include="..\..\pellets\z_win_utils\system_version.hpp" />
     <ClInclude Include="..\..\pellets\z_win_utils\taskbar_position.hpp" />
+    <ClInclude Include="..\..\pellets\z_win_utils\task_scheduler.hpp" />
     <ClInclude Include="..\..\pellets\z_win_utils\TestWinUtils.h" />
     <ClInclude Include="..\..\pellets\z_win_utils\tick_counter.hpp" />
     <ClInclude Include="..\..\pellets\z_win_utils\time.hpp" />
     <ClInclude Include="..\..\pellets\z_win_utils\time_string.hpp" />
     <ClInclude Include="..\..\pellets\z_win_utils\token.hpp" />
+    <ClInclude Include="..\..\pellets\z_win_utils\uri.hpp" />
+    <ClInclude Include="..\..\pellets\z_win_utils\uri_query.hpp" />
+    <ClInclude Include="..\..\pellets\z_win_utils\uri_utils.hpp" />
     <ClInclude Include="..\..\pellets\z_win_utils\usid.hpp" />
     <ClInclude Include="..\..\pellets\z_win_utils\uuid.hpp" />
     <ClInclude Include="..\..\pellets\z_win_utils\win_utils.h" />
     <ClInclude Include="..\..\pellets\z_win_utils\win_utils_header.h" />
     <ClInclude Include="..\..\pellets\z_win_utils\wow64.hpp" />
+    <ClInclude Include="..\..\pellets\z_zlib\z_zlib.h" />
+    <ClInclude Include="..\..\pellets\z_zlib\z_zlib_header.h" />
     <ClInclude Include="def.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestDataBox.h" />
     <ClInclude Include="TestDesignPattern.h" />
     <ClInclude Include="TestEvent.h" />
+    <ClInclude Include="TestHarold.h" />
     <ClInclude Include="TestLuaBind.h" />
     <ClInclude Include="TestPeutils.h" />
     <ClInclude Include="TestSerialize.h" />
@@ -336,9 +412,21 @@
     <ClCompile Include="..\..\3rdparty\luasrc\lundump.c" />
     <ClCompile Include="..\..\3rdparty\luasrc\lvm.c" />
     <ClCompile Include="..\..\3rdparty\luasrc\lzio.c" />
+    <ClCompile Include="..\..\3rdparty\mongoose\mongoose.c" />
     <ClCompile Include="..\..\pellets\data_box\array_data.cpp" />
     <ClCompile Include="..\..\pellets\data_box\value_data.cpp" />
     <ClCompile Include="..\..\pellets\data_box\value_data_string.cpp" />
+    <ClCompile Include="..\..\pellets\harold\harold_server_auth_log.cpp" />
+    <ClCompile Include="..\..\pellets\harold\harold_server_dynamic_impl.cpp" />
+    <ClCompile Include="..\..\pellets\harold\harold_server_impl.cpp" />
+    <ClCompile Include="..\..\pellets\harold\harold_server_request_api.cpp" />
+    <ClCompile Include="..\..\pellets\harold\harold_server_request_directory_listing.cpp" />
+    <ClCompile Include="..\..\pellets\harold\harold_server_request_download.cpp" />
+    <ClCompile Include="..\..\pellets\harold\harold_server_request_dynamic_api.cpp" />
+    <ClCompile Include="..\..\pellets\harold\harold_server_request_dynamic_download.cpp" />
+    <ClCompile Include="..\..\pellets\harold\harold_server_request_log.cpp" />
+    <ClCompile Include="..\..\pellets\harold\harold_server_request_upload.cpp" />
+    <ClCompile Include="..\..\pellets\harold\harold_server_status_log.cpp" />
     <ClCompile Include="..\..\pellets\ipc\ipccallclient.cpp" />
     <ClCompile Include="..\..\pellets\ipc\ipcjsonprocessor.cpp" />
     <ClCompile Include="..\..\pellets\ipc\ipcpipecltchannel.cpp" />
@@ -352,10 +440,7 @@
     <ClCompile Include="..\..\pellets\serialize\data_format.cpp" />
     <ClCompile Include="..\..\pellets\serialize\serialize_engine.cpp" />
     <ClCompile Include="..\..\pellets\z_http\TestHttp.cpp" />
-    <ClCompile Include="..\..\pellets\z_lua_bind\z_lua_bind_internal_pop.cpp" />
-    <ClCompile Include="..\..\pellets\z_lua_bind\z_lua_bind_internal_push.cpp" />
-    <ClCompile Include="..\..\pellets\z_lua_bind\z_lua_function_reg.cpp" />
-    <ClCompile Include="..\..\pellets\z_lua_bind\z_lua_state.cpp" />
+    <ClCompile Include="..\..\pellets\z_net\z_net_socket_address_ipv4.cpp" />
     <ClCompile Include="..\..\pellets\z_thread_pool\z_task.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -382,6 +467,7 @@
     <ClCompile Include="TestDataBox.cpp" />
     <ClCompile Include="TestDesignPattern.cpp" />
     <ClCompile Include="TestEvent.cpp" />
+    <ClCompile Include="TestHarold.cpp" />
     <ClCompile Include="TestLuaBind.cpp" />
     <ClCompile Include="TestPeutils.cpp" />
     <ClCompile Include="TestSerialize.cpp" />

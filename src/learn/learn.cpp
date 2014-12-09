@@ -4,16 +4,9 @@
 #include "stdafx.h"
 #include "practice/practice_test.h"
 
-#ifdef _TEST_BOOST_
-#include "test_smart_ptr.h"
-#include "test_regex.h"
-#include "test_atomic.h"
-#include "test_chrono.h"
-#include "test_bitset.h"
-#include "test_array.h"
-#include "test_stream.h"
-#include "test_functional.h"
+#include "test_standard.h"
 
+#ifdef _TEST_BOOST_
 #include "test_conversion.h"
 #include "test_string_aogo.h"
 #include "test_format.h"
@@ -62,18 +55,15 @@
 
 #include "test_flatbuffer.h"
 #include "test_sqlite.h"
+#include "test_libevent.h"
+#include "test_qrcode.h"
+#include "test_mongoose.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
     //practice_test();
-    //test_smart_ptr();
-    //test_regex();
-    //test_atomic();
-    //test_chrono();
-    //test_bitset();
-    //test_array();
-    //test_stream();
-    //test_functional();
+
+    test_standard();
 
     //test_conversion();
     //test_string_aogo();
@@ -110,7 +100,10 @@ int _tmain(int argc, _TCHAR* argv[])
     //test_json_rpc();
 
     //test_flatbuffer();
-    test_sqlite();
+    //test_sqlite();
+    //test_libevent();
+    //test_qrcode();
+    test_mongoose();
 
     getchar();
     return 0;

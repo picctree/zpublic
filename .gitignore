@@ -30,6 +30,9 @@
 *.idb
 *.pdb
 *.aps
+*.suo
+*.ncb
+*.opensdf
 
 *.lib
 !/3rdparty/boost_lib/*.lib
@@ -39,6 +42,7 @@
 !/3rdparty/poco_lib_discarded/*.lib
 !/3rdparty/hge/lib/*.lib
 !/3rdparty/cppsqlite/sqlite3.lib
+!/3rdparty/zlib_lib/*.lib
 
 Debug
 !/3rdparty/boost/preprocessor/debug/
@@ -87,3 +91,8 @@ obj
 /doc/zpublic-pellets-z_win_utils.chm
 /src/app/teapot/AddIn.h
 /src/app/teapot/AddIn_i.c
+
+/3rdparty/zlib/contrib/masmx86/match686.lst
+/3rdparty/zlib/contrib/masmx86/inffas32.lst
+/3rdparty/zlib/contrib/vstudio/vc11/x86
+

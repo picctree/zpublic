@@ -27,8 +27,8 @@ namespace zl
 {
 namespace WinUtils
 {
-    typedef void (WINAPI *LPFN_GetNativeSystemInfo)(LPSYSTEM_INFO);
-    typedef BOOL (WINAPI *LPFN_IsWow64Process) (HANDLE, PBOOL);
+    typedef void (WINAPI *LPFN_ZLGetNativeSystemInfo)(LPSYSTEM_INFO);
+    typedef BOOL (WINAPI *LPFN_ZLIsWow64Process) (HANDLE, PBOOL);
         /**
      * @brief 获取系统版本信息
      */
@@ -82,7 +82,7 @@ namespace WinUtils
             if (enumProcessorArchitectureNone == emProcArch)
             {
                 emProcArch = enumProcessorArchitecture32Bit;
-                LPFN_GetNativeSystemInfo pGNSI = (LPFN_GetNativeSystemInfo)::GetProcAddress(
+                LPFN_ZLGetNativeSystemInfo pGNSI = (LPFN_ZLGetNativeSystemInfo)::GetProcAddress(
                     ::GetModuleHandleW(L"kernel32.dll"),
                     "GetNativeSystemInfo");
                 if (NULL != pGNSI)
@@ -101,20 +101,23 @@ namespace WinUtils
             return emProcArch;
         }
 
+        /**
+         * @brief 判断系统是否是vista及以上版本
+         */
         static BOOL IsVistaOrLater()
         {
-            BOOL bRet = FALSE;
-            enumSystemVersion emSystemVersion = GetSystemVersion();
-
-            if ( emSystemVersion == enumSystemVersionVista   ||
-                emSystemVersion == enumSystemVersionWin7    ||
-                emSystemVersion == enumSystemVersionWin2008 ||
-                emSystemVersion == enumSystemVersionWin8 )
+            DWORD dwMarjorVersion = 0;
+            DWORD dwMinorVersion  = 0;
+            if (GetSystemVersion(dwMarjorVersion, dwMinorVersion))
             {
-                bRet = TRUE;
+                if (dwMarjorVersion >= 6)
+                {
+                    return TRUE;
+                }
             }
-            return bRet;
+            return FALSE;
         }
+
         /**
          * @brief 获取系统版本
          * @param[out] dwMarjorVersion 高版本号
@@ -142,7 +145,7 @@ namespace WinUtils
             {
                 BOOL bIsWow64 = FALSE;
 
-                LPFN_IsWow64Process pfn_IsWow64Process = (LPFN_IsWow64Process)GetProcAddress(
+                LPFN_ZLIsWow64Process pfn_IsWow64Process = (LPFN_ZLIsWow64Process)GetProcAddress(
                     ::GetModuleHandle(_T("kernel32")), 
                     "IsWow64Process");
 

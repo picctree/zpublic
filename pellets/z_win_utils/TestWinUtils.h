@@ -40,6 +40,14 @@ public:
         TEST_ADD(CTestWinUtils::test_uuid);
         TEST_ADD(CTestWinUtils::test_acl);
         TEST_ADD(CTestWinUtils::test_disk);
+        TEST_ADD(CTestWinUtils::test_base64);
+        TEST_ADD(CTestWinUtils::test_uri);
+        TEST_ADD(CTestWinUtils::test_md5);
+        TEST_ADD(CTestWinUtils::test_crc32);
+        TEST_ADD(CTestWinUtils::test_signer_info);
+        TEST_ADD(CTestWinUtils::test_task_scheduler);
+        TEST_ADD(CTestWinUtils::test_split_str);
+        TEST_ADD(CTestWinUtils::test_str_conv);
     }
 
     void test_path()
@@ -408,7 +416,17 @@ public:
         TEST_ASSERT(ZLCpu::GetCpuMHz() != 0);
         TEST_ASSERT(ZLCpu::GetProcessorsCount() != 0);
         TEST_ASSERT(ZLMemory::GetMemorySize() != 0);
+        TEST_ASSERT(ZLMemory::GetUsedMem() != 0);
         TEST_ASSERT(ZLDrive::GetDriveSize() != 0);
+        TEST_ASSERT(ZLSystemInfo::CreateGUID() != L"");
+        TEST_ASSERT(ZLSystemInfo::GetComputername() != L"");
+        TEST_ASSERT(ZLSystemInfo::GetComputerType() != emComputeType_Null);
+        TEST_ASSERT(ZLSystemInfo::GetComputerFullUsername() != L"");
+
+        WSADATA wsData;
+        ::WSAStartup(MAKEWORD(2,2), &wsData);
+        TEST_ASSERT(ZLSystemInfo::GetHostname() != L"");
+        ::WSACleanup();
     }
 
     void test_process()
@@ -692,7 +710,7 @@ public:
     {
         ZLAcl acl;
         ZLRegister r;
-        r.Open(HKEY_LOCAL_MACHINE, L"Software\\zpublic_test_acl\\", TRUE);
+        r.Open(HKEY_LOCAL_MACHINE, L"Software\\zpublic_test_acl\\", KEY_WRITE, TRUE);
         TEST_ASSERT(acl.Open(L"MACHINE\\Software\\zpublic_test_acl\\", SE_REGISTRY_KEY) == TRUE);
         TEST_ASSERT(acl.SetSecurity(L"Users", KEY_ALL_ACCESS, DENY_ACCESS) == TRUE);
         TEST_ASSERT(acl.SetSecurity(L"Users") == TRUE);
@@ -701,11 +719,13 @@ public:
         TEST_ASSERT(acl.Open(ZLSystemPath::GetCommonAppDataDir() + L"\\zpublic_test\\acl", SE_FILE_OBJECT) == TRUE);
         TEST_ASSERT(acl.SetSecurity(L"Users", KEY_ALL_ACCESS, DENY_ACCESS) == TRUE);
         TEST_ASSERT(acl.SetSecurity(L"Users") == TRUE);
+
+        TEST_ASSERT(ZLRegister::DelKey(HKEY_LOCAL_MACHINE, L"Software\\zpublic_test_acl") == TRUE);
     }
 
     void test_disk()
     {
-        vecDisk diskList;
+        std::vector<CString> diskList;
         TEST_ASSERT(ZLDisk::GetAllDiskLetter(diskList) == TRUE);
         TEST_ASSERT(!diskList.empty() == TRUE);
         CString cstrSysSign = ZLSystemPath::GetWindowsDir();
@@ -736,8 +756,166 @@ public:
         TEST_ASSERT(reg.DelValue(L"sz_test") == TRUE);
         TEST_ASSERT(reg.GetStringValue(L"sz_test", sValue) == FALSE);
 
+        std::vector<CString> vecMultiSz;
+        vecMultiSz.push_back(L"hello");
+        vecMultiSz.push_back(L"world");
+        vecMultiSz.push_back(L"zpulic");
+        TEST_ASSERT(reg.SetMultiSzValue(L"multi_test1", L"val1\0val2\0val3\0\0") == TRUE);
+        TEST_ASSERT(reg.SetMultiSzValue(L"multi_test2", vecMultiSz) ==  TRUE);
+
+        WCHAR szMultiSz[MAX_PATH] = {0};
+        ULONG ulChars = MAX_PATH - 1;
+        TEST_ASSERT(reg.GetMultiSzValue(L"multi_test1", szMultiSz, &ulChars) == TRUE);
+        TEST_ASSERT(0 == memcmp(L"val1\0val2\0val3\0\0", szMultiSz, ulChars));
+
+        TEST_ASSERT(reg.GetMultiSzValue(L"multi_test2", vecMultiSz) == TRUE);
+        TEST_ASSERT(vecMultiSz.size() == 3);
+
+        const char* pBinary = "\1\2\3\4";
+        char arrResult[MAX_PATH] = {0};
+        ULONG ulBytes = MAX_PATH - 1;
+        TEST_ASSERT(reg.SetBinaryValue(L"binary_test", (void*)pBinary, 4) == TRUE);
+        TEST_ASSERT(reg.GetBinaryValue(L"binary_test", (void*)arrResult, &ulBytes) == TRUE);
+        TEST_ASSERT(0 == memcmp(pBinary, arrResult, 4));
+
         reg.Close();
 
         TEST_ASSERT(ZLRegister::DelKey(hTestKey, sTestKeyPath) == TRUE);
+    }
+
+    void test_base64()
+    {
+        LPCTSTR lp = L"你好,这是中文测试";
+
+        // GB2312
+        const std::string sGb2312A = CW2A(lp, CP_ACP);
+        const std::string sEncodeGb2312A = "xOO6wyzV4srH1tDOxLLiytQ=";
+
+        std::string sEncode1 = zl::WinUtils::ZLBase64::Encode(sGb2312A.c_str(), sGb2312A.length());
+        TEST_ASSERT(sEncodeGb2312A == sEncode1);
+        std::string sDecode1 = zl::WinUtils::ZLBase64::Decode(sEncode1.c_str(), sEncode1.length());
+        TEST_ASSERT(sGb2312A == sDecode1);
+
+        // UTF-8
+        const std::string sUtf8A   = CW2A(lp, CP_UTF8);
+        const std::string sEncodeUtf8A   = "5L2g5aW9LOi/meaYr+S4reaWh+a1i+ivlQ==";
+
+        std::string sEncode2 = zl::WinUtils::ZLBase64::Encode(sUtf8A.c_str(), sUtf8A.length());
+        TEST_ASSERT(sEncodeUtf8A == sEncode2);
+        std::string sDecodeUtf8 = zl::WinUtils::ZLBase64::Decode(sEncode2.c_str(), sEncode2.length());
+        TEST_ASSERT(sUtf8A == sDecodeUtf8);
+    }
+
+    void test_uri()
+    {
+        zl::WinUtils::ZLUri theUri;
+        theUri.SetScheme("https");
+        theUri.SetAuthority("github.com");
+        theUri.SetPath("zpublic");
+
+        std::string sUrl = theUri.ToString();
+        TEST_ASSERT(sUrl == "https://github.com/zpublic");
+
+        theUri.Clear();
+        theUri.SetScheme("http");
+        theUri.SetAuthority("www.baidu.com");
+        theUri.SetPath("baidu");
+
+        // 生成查询串
+        zl::WinUtils::ZLUriQuery theQuery;
+        theQuery.push_back("tn", "monline_5_dg");
+        theQuery.push_back("ie", "utf-8");
+        theQuery.push_back("wd", "zpublic");
+
+        theUri.SetQuery(theQuery.to_string());
+        sUrl = theUri.ToString();
+        TEST_ASSERT(sUrl == "http://www.baidu.com/baidu?tn=monline_5_dg&ie=utf-8&wd=zpublic");
+    }
+
+    void test_md5()
+    {
+        CString sMd5;
+
+        sMd5 = zl::WinUtils::ZLMd5::GetFileMd5(NULL);
+        TEST_ASSERT(sMd5.IsEmpty() == TRUE);
+
+        sMd5 = zl::WinUtils::ZLMd5::GetFileMd5(L"c:\\windows\\regedit.exe");
+        TEST_ASSERT(sMd5.GetLength() == 32);
+
+        std::string src = "helloworld_hehe_memeda.";
+        CString sMd5OfStr = zl::WinUtils::ZLMd5::GetBufMd5((unsigned char*)src.c_str(), (unsigned int)src.length());
+        TEST_ASSERT(sMd5OfStr.Compare(L"716b770969588ea89d34a7761841b424") == 0);
+    }
+
+    void test_crc32()
+    {
+        std::string sBufA = "zpublic";
+        unsigned long nCrc32Code = zl::WinUtils::ZLCrc32::Crc32Buf(0, (unsigned char*)sBufA.c_str(), (unsigned int)sBufA.length());
+        TEST_ASSERT(nCrc32Code == 0x5f02dfa5);
+
+        sBufA = "hello zpublic";
+        nCrc32Code = zl::WinUtils::ZLCrc32::Crc32Buf(0, (unsigned char*)sBufA.c_str(), (unsigned int)sBufA.length());
+        TEST_ASSERT(nCrc32Code == 0xc2a29850);
+    }
+
+    void test_signer_info()
+    {
+        CString sTestFile = L"c:\\windows\\regedit.exe";
+        zl::WinUtils::ZLSignInfo signer;
+
+        TEST_ASSERT(signer.Load(NULL) == FALSE);
+        TEST_ASSERT(signer.Load(sTestFile) == FALSE);
+
+        zl::WinUtils::ZLSignInfo::IsDigitalSignatureHasTimestamp(sTestFile);
+
+//         CString sTestFile2 = L"c:\\Program Files (x86)\\kingsoft\\kingsoft antivirus\\kxescore.exe";
+//         signer.Load(sTestFile2);
+//         CString s1    = signer.GetNameOfSigner();
+//         CString s2    = signer.GetNameOfIssuer();
+//         SYSTEMTIME st = signer.GetSigningTime();
+//         CString s3    = signer.GetSerialNumber();
+//         zl::WinUtils::ZLSignInfo::IsDigitalSignatureHasTimestamp(sTestFile2);
+    }
+
+    void test_task_scheduler()
+    {
+        CString sTaskName = L"zpublic_test";
+        TEST_ASSERT(zl::WinUtils::ZLTaskScheduler::CreateSimpleLogonTaskScheduler(sTaskName, L"c:\\windows\\regedit.exe") == TRUE);
+        TEST_ASSERT(zl::WinUtils::ZLTaskScheduler::DeleteTaskScheduler(sTaskName) == TRUE);
+    }
+
+    void test_split_str()
+    {
+        std::vector<std::wstring> vecResult;
+        zl::WinUtils::ZLSplitStr::Split(L"呵呵,这,里,是,zpublic", L',', vecResult);
+        TEST_ASSERT(vecResult.size() == 5);
+        TEST_ASSERT(vecResult[0] == L"呵呵");
+        TEST_ASSERT(vecResult[1] == L"这");
+        TEST_ASSERT(vecResult[2] == L"里");
+        TEST_ASSERT(vecResult[3] == L"是");
+        TEST_ASSERT(vecResult[4] == L"zpublic");
+
+        zl::WinUtils::ZLSplitStr::Split(L"你好呵呵,世界呵呵,z呵呵public!呵呵", L"呵呵", vecResult);
+        TEST_ASSERT(vecResult.size() == 5);
+        TEST_ASSERT(vecResult[0] == L"你好");
+        TEST_ASSERT(vecResult[1] == L",世界");
+        TEST_ASSERT(vecResult[2] == L",z");
+        TEST_ASSERT(vecResult[3] == L"public!");
+        TEST_ASSERT(vecResult[4] == L"");
+    }
+
+    void test_str_conv()
+    {
+        // A2W
+        LPCSTR a = "哈哈,我是a";
+        TEST_ASSERT(ZLA2W(a)          == CA2W(a));
+        TEST_ASSERT(ZLA2W(a, CP_UTF8) == CA2W(a, CP_UTF8));
+        TEST_ASSERT(ZLA2W(a, CP_ACP)  == CA2W(a, CP_ACP));
+
+        // W2A
+        LPCWSTR w = L"呵呵,我是w";
+        TEST_ASSERT(ZLW2A(w)          == CW2A(w));
+        TEST_ASSERT(ZLW2A(w, CP_UTF8) == CW2A(w, CP_UTF8));
+        TEST_ASSERT(ZLW2A(w, CP_ACP)  == CW2A(w, CP_ACP));
     }
 };

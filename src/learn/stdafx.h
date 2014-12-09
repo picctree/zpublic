@@ -1,6 +1,8 @@
 #pragma once
 
 #include "targetver.h"
+#include <winsock2.h>
+#pragma comment(lib, "Ws2_32.lib")
 
 #include <stdio.h>
 #include <tchar.h>
@@ -8,6 +10,9 @@
 #include <stdint.h>
 
 #include <assert.h>
+
+///> error C4995: “swprintf”:  名称被标记为 #pragma deprecated
+#pragma warning(disable:4995)
 
 ///> Function call with parameters that may be unsafe - this call relies
 ///> on the caller to check that the passed values are correct. To disable
@@ -205,3 +210,9 @@ extern "C"
 
 ///> json
 #include <json/json.h>
+
+///> libevent
+#include "event2/event-config.h"
+#include "event2/event.h"
+#include "event2/event_compat.h"
+#include "event2/event_struct.h"

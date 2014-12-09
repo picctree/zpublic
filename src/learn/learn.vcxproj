@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -19,13 +19,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120_xp</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120_xp</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -51,8 +51,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>NOMINMAX;WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>./;./../../public;./../../3rdparty;./../../3rdparty/tut;./../../3rdparty/jsonlib;./../../3rdparty/flatbuffer/include</AdditionalIncludeDirectories>
+      <SDLCheck>false</SDLCheck>
+      <AdditionalIncludeDirectories>./;./../../public;./../../3rdparty;./../../3rdparty/tut;./../../3rdparty/jsonlib;./../../3rdparty/flatbuffer/include;./../../3rdparty/libevent/include;./../../3rdparty/libevent/WIN32-Code;./../../3rdparty/libevent/compat;./../../3rdparty/mongoose</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zm500  -D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -77,9 +77,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NOMINMAX;WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>./;./../../public;./../../3rdparty;./../../3rdparty/tut;./../../3rdparty/jsonlib;./../../3rdparty/flatbuffer/include</AdditionalIncludeDirectories>
-      <AdditionalOptions>-Zm1000  -D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
+      <SDLCheck>false</SDLCheck>
+      <AdditionalIncludeDirectories>./;./../../public;./../../3rdparty;./../../3rdparty/tut;./../../3rdparty/jsonlib;./../../3rdparty/flatbuffer/include;./../../3rdparty/libevent/include;./../../3rdparty/libevent/WIN32-Code;./../../3rdparty/libevent/compat;./../../3rdparty/mongoose</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zm500  -D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -186,6 +186,54 @@
     <ClInclude Include="..\..\3rdparty\jsonlib\json\reader.h" />
     <ClInclude Include="..\..\3rdparty\jsonlib\json\value.h" />
     <ClInclude Include="..\..\3rdparty\jsonlib\json\writer.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\bufferevent-internal.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\changelist-internal.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\defer-internal.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\evbuffer-internal.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\evdns.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\event-internal.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\event.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\evhttp.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\evmap-internal.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\evrpc-internal.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\evrpc.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\evsignal-internal.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\evthread-internal.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\evutil.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\ht-internal.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\http-internal.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\include\event2\buffer.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\include\event2\bufferevent.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\include\event2\bufferevent_compat.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\include\event2\bufferevent_ssl.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\include\event2\bufferevent_struct.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\include\event2\buffer_compat.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\include\event2\dns.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\include\event2\dns_compat.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\include\event2\dns_struct.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\include\event2\event.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\include\event2\event_compat.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\include\event2\event_struct.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\include\event2\http.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\include\event2\http_compat.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\include\event2\http_struct.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\include\event2\keyvalq_struct.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\include\event2\listener.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\include\event2\rpc.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\include\event2\rpc_compat.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\include\event2\rpc_struct.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\include\event2\tag.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\include\event2\tag_compat.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\include\event2\thread.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\include\event2\util.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\iocp-internal.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\ipv6-internal.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\log-internal.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\minheap-internal.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\mm-internal.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\ratelim-internal.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\strlcpy-internal.h" />
+    <ClInclude Include="..\..\3rdparty\libevent\util-internal.h" />
     <ClInclude Include="..\..\3rdparty\luasrc\lapi.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -289,6 +337,25 @@
     <ClInclude Include="..\..\3rdparty\lua_tinker\lua_tinker_ex.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="..\..\3rdparty\mongoose\examples\websocket_ssl_proxy\net_skeleton.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\3rdparty\mongoose\examples\websocket_ssl_proxy\ssl_wrapper.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\3rdparty\mongoose\mongoose.h" />
+    <ClInclude Include="..\..\3rdparty\qrencode\bitstream.h" />
+    <ClInclude Include="..\..\3rdparty\qrencode\mask.h" />
+    <ClInclude Include="..\..\3rdparty\qrencode\mmask.h" />
+    <ClInclude Include="..\..\3rdparty\qrencode\mqrspec.h" />
+    <ClInclude Include="..\..\3rdparty\qrencode\qrencode.h" />
+    <ClInclude Include="..\..\3rdparty\qrencode\qrencode_inner.h" />
+    <ClInclude Include="..\..\3rdparty\qrencode\qrinput.h" />
+    <ClInclude Include="..\..\3rdparty\qrencode\qrspec.h" />
+    <ClInclude Include="..\..\3rdparty\qrencode\rscode.h" />
+    <ClInclude Include="..\..\3rdparty\qrencode\split.h" />
     <ClInclude Include="..\..\3rdparty\rapidxml-1.13\rapidxml.hpp" />
     <ClInclude Include="..\..\3rdparty\rapidxml-1.13\rapidxml_iterators.hpp" />
     <ClInclude Include="..\..\3rdparty\rapidxml-1.13\rapidxml_print.hpp" />
@@ -315,8 +382,9 @@
     <ClInclude Include="sample_lua.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="test_array.h" />
-    <ClInclude Include="test_atomic.h" />
+    <ClInclude Include="test_cpp11_alignment.h" />
+    <ClInclude Include="test_cpp11_array.h" />
+    <ClInclude Include="test_cpp11_atomic.h" />
     <ClInclude Include="test_bimap.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -336,6 +404,19 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="test_cpp11_auto.h" />
+    <ClInclude Include="test_cpp11_cplusplus_macro.h" />
+    <ClInclude Include="test_cpp11_decltype.h" />
+    <ClInclude Include="test_cpp11_enum_class.h" />
+    <ClInclude Include="test_cpp11_initializer_lists.h" />
+    <ClInclude Include="test_cpp11_lambda.h" />
+    <ClInclude Include="test_cpp11_long_long.h" />
+    <ClInclude Include="test_cpp11_move_mantics.h" />
+    <ClInclude Include="test_cpp11_nullptr.h" />
+    <ClInclude Include="test_cpp11_range_for.h" />
+    <ClInclude Include="test_cpp11_right_angle_brackets.h" />
+    <ClInclude Include="test_cpp11_tuple.h" />
+    <ClInclude Include="test_cpp11_variadic_templates.h" />
     <ClInclude Include="test_dynamic_bitset.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -348,7 +429,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="test_functional.h" />
+    <ClInclude Include="test_cpp11_functional.h" />
     <ClInclude Include="test_hex.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -363,6 +444,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="test_libevent.h" />
     <ClInclude Include="test_linq.h" />
     <ClInclude Include="test_lua.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -372,6 +454,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="test_mongoose.h" />
     <ClInclude Include="test_numeric_conversion.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -404,6 +487,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="test_qrcode.h" />
     <ClInclude Include="test_rapidxml.h" />
     <ClInclude Include="test_regex.h" />
     <ClInclude Include="test_searching_algorithms.h">
@@ -412,6 +496,7 @@
     </ClInclude>
     <ClInclude Include="test_smart_ptr.h" />
     <ClInclude Include="test_sqlite.h" />
+    <ClInclude Include="test_standard.h" />
     <ClInclude Include="test_stream.h" />
     <ClInclude Include="test_string_aogo.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -431,11 +516,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="test_xde.h" />
-    <ClInclude Include="zl_crul_file.h">
+    <ClInclude Include="zl_curl_file.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="zl_crul_http.h">
+    <ClInclude Include="zl_curl_http.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
@@ -523,6 +608,104 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\3rdparty\jsonlib\lib_json\json_writer.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\libevent\buffer.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4996</DisableSpecificWarnings>
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4996</DisableSpecificWarnings>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\libevent\bufferevent.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\libevent\bufferevent_async.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\libevent\bufferevent_filter.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\libevent\bufferevent_pair.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\libevent\bufferevent_ratelim.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\libevent\bufferevent_sock.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\libevent\buffer_iocp.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\libevent\evdns.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\libevent\event.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\libevent\event_iocp.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\libevent\event_tagging.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\libevent\evmap.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\libevent\evrpc.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\libevent\evthread.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\libevent\evthread_win32.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\libevent\evutil.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\libevent\evutil_rand.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\libevent\http.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\libevent\listener.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\libevent\log.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\libevent\signal.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\libevent\strlcpy.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\libevent\win32select.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -723,6 +906,136 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\3rdparty\mongoose\examples\big_upload\big_upload.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\mongoose\examples\cookie_authentication\cookie_auth.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\mongoose\examples\digest_authentication\digest_auth.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\mongoose\examples\file_upload\file_upload.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\mongoose\examples\form_submit\form_submit.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\mongoose\examples\hello_world\hello_world.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\mongoose\examples\http_client\http_client.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\mongoose\examples\mjpg_streamer\mjpg_streamer.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\mongoose\examples\multi_threaded_server\multi_threaded_server.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\mongoose\examples\proxy_server\proxy_server.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\mongoose\examples\restful_api\restful_api.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\mongoose\examples\send_file\send_file.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\mongoose\examples\websocket_chat\websocket_chat.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\mongoose\examples\websocket_echo_server\websocket_echo_server.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\mongoose\examples\websocket_ssl_proxy\ssl_wrapper.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\mongoose\examples\websocket_ssl_proxy\ws_ssl.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\mongoose\examples\web_server\web_server.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\mongoose\mongoose.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\mongoose\test\unit_test.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\qrencode\bitstream.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsC</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\qrencode\mask.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsC</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\qrencode\mmask.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsC</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\qrencode\mqrspec.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsC</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\qrencode\qrencode.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsC</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\qrencode\qrinput.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsC</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\qrencode\qrspec.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsC</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\qrencode\rscode.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsC</CompileAs>
+    </ClCompile>
+    <ClCompile Include="..\..\3rdparty\qrencode\split.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsC</CompileAs>
+    </ClCompile>
     <ClCompile Include="..\..\3rdparty\xde102\xde.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
@@ -757,8 +1070,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="test_array.cpp" />
-    <ClCompile Include="test_atomic.cpp" />
+    <ClCompile Include="test_cpp11_alignment.cpp" />
+    <ClCompile Include="test_cpp11_array.cpp" />
+    <ClCompile Include="test_cpp11_atomic.cpp" />
     <ClCompile Include="test_bimap.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -778,6 +1092,19 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="test_cpp11_auto.cpp" />
+    <ClCompile Include="test_cpp11_cplusplus_macro.cpp" />
+    <ClCompile Include="test_cpp11_decltype.cpp" />
+    <ClCompile Include="test_cpp11_enum_class.cpp" />
+    <ClCompile Include="test_cpp11_initializer_lists.cpp" />
+    <ClCompile Include="test_cpp11_lambda.cpp" />
+    <ClCompile Include="test_cpp11_long_long.cpp" />
+    <ClCompile Include="test_cpp11_move_mantics.cpp" />
+    <ClCompile Include="test_cpp11_nullptr.cpp" />
+    <ClCompile Include="test_cpp11_range_for.cpp" />
+    <ClCompile Include="test_cpp11_right_angle_brackets.cpp" />
+    <ClCompile Include="test_cpp11_tuple.cpp" />
+    <ClCompile Include="test_cpp11_variadic_templates.cpp" />
     <ClCompile Include="test_dynamic_bitset.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -790,7 +1117,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="test_functional.cpp" />
+    <ClCompile Include="test_cpp11_functional.cpp" />
     <ClCompile Include="test_hex.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -805,6 +1132,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="test_libevent.cpp" />
     <ClCompile Include="test_linq.cpp" />
     <ClCompile Include="test_lua.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -814,6 +1142,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="test_mongoose.cpp" />
     <ClCompile Include="test_numeric_conversion.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -848,6 +1177,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="test_qrcode.cpp" />
     <ClCompile Include="test_rapidxml.cpp" />
     <ClCompile Include="test_regex.cpp" />
     <ClCompile Include="test_searching_algorithms.cpp">
@@ -875,11 +1205,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="test_xde.cpp" />
-    <ClCompile Include="zl_crul_file.cpp">
+    <ClCompile Include="zl_curl_file.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="zl_crul_http.cpp">
+    <ClCompile Include="zl_curl_http.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -895,6 +1225,30 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </None>
+    <None Include="..\..\3rdparty\mongoose\examples\cookie_authentication\index.html" />
+    <None Include="..\..\3rdparty\mongoose\examples\cookie_authentication\login.html" />
+    <None Include="..\..\3rdparty\mongoose\examples\csharp\example.cs">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\3rdparty\mongoose\examples\csharp\mongoose.cs">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </None>
+    <None Include="..\..\3rdparty\mongoose\examples\proxy_server\proxy_web_root\app1\index.html" />
+    <None Include="..\..\3rdparty\mongoose\examples\proxy_server\proxy_web_root\app2\index.html" />
+    <None Include="..\..\3rdparty\mongoose\examples\proxy_server\proxy_web_root\index.html" />
+    <None Include="..\..\3rdparty\mongoose\examples\proxy_server\ssl_cert.pem" />
+    <None Include="..\..\3rdparty\mongoose\examples\restful_api\index.html" />
+    <None Include="..\..\3rdparty\mongoose\examples\websocket_chat\index.html" />
+    <None Include="..\..\3rdparty\mongoose\examples\websocket_echo_server\index.html" />
+    <None Include="..\..\3rdparty\mongoose\examples\websocket_ssl_proxy\certs\ws1_ca.pem" />
+    <None Include="..\..\3rdparty\mongoose\examples\websocket_ssl_proxy\certs\ws1_client.pem" />
+    <None Include="..\..\3rdparty\mongoose\examples\websocket_ssl_proxy\certs\ws1_server.pem" />
+    <None Include="..\..\3rdparty\mongoose\examples\websocket_ssl_proxy\certs\ws2_ca.pem" />
+    <None Include="..\..\3rdparty\mongoose\examples\websocket_ssl_proxy\certs\ws2_client.pem" />
+    <None Include="..\..\3rdparty\mongoose\examples\websocket_ssl_proxy\certs\ws2_server.pem" />
+    <None Include="..\..\3rdparty\mongoose\examples\websocket_ssl_proxy\ws_ssl.html" />
     <None Include="sample1.lua" />
     <None Include="sample2.lua" />
     <None Include="sample3.lua" />
